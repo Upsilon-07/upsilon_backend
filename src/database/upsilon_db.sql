@@ -23,13 +23,12 @@ DROP TABLE IF EXISTS `courses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `courses` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `courseName` varchar(255) NOT NULL,
   `image` text,
   `rating` int DEFAULT NULL,
   `trainer` varchar(255) NOT NULL,
   `difficulty` int NOT NULL,
-  `isFavorite` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -51,7 +50,7 @@ DROP TABLE IF EXISTS `exercise`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `exercise` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `exercise_name` varchar(255) NOT NULL,
   `duration` int NOT NULL,
   `duration_type` varchar(255) NOT NULL,
@@ -135,7 +134,7 @@ DROP TABLE IF EXISTS `lessons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lessons` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `lesson_name` varchar(255) NOT NULL,
   `duration` int NOT NULL,
   `lesson_type` varchar(255) NOT NULL,
@@ -167,7 +166,7 @@ DROP TABLE IF EXISTS `meals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `meals` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `meal_name` varchar(255) NOT NULL,
   `duration` int NOT NULL,
   `image` text,
@@ -195,7 +194,7 @@ DROP TABLE IF EXISTS `nutrition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nutrition` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nutrient_name` varchar(50) NOT NULL,
   `nutrient_type` varchar(50) NOT NULL,
   `nutrient_value` int NOT NULL,
@@ -219,29 +218,32 @@ UNLOCK TABLES;
 -- Table structure for table `poses`
 --
 
-DROP TABLE IF EXISTS `poses`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `poses` (
-  `id` int NOT NULL,
-  `pose_name` varchar(255) NOT NULL,
-  `duration` int NOT NULL,
-  `image` text,
-  `exercise_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `exercise_id` (`exercise_id`),
-  CONSTRAINT `poses_ibfk_1` FOREIGN KEY (`exercise_id`) REFERENCES `exercise` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `poses`
---
+-- NOTE: we comment this table because it isn't really necessary to use
 
-LOCK TABLES `poses` WRITE;
-/*!40000 ALTER TABLE `poses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `poses` ENABLE KEYS */;
-UNLOCK TABLES;
+-- DROP TABLE IF EXISTS `poses`;
+-- /*!40101 SET @saved_cs_client     = @@character_set_client */;
+-- /*!50503 SET character_set_client = utf8mb4 */;
+-- CREATE TABLE `poses` (
+--   `id` int NOT NULL AUTO_INCREMENT,
+--   `pose_name` varchar(255) NOT NULL,
+--   `duration` int NOT NULL,
+--   `image` text,
+--   `exercise_id` int DEFAULT NULL,
+--   PRIMARY KEY (`id`),
+--   KEY `exercise_id` (`exercise_id`),
+--   CONSTRAINT `poses_ibfk_1` FOREIGN KEY (`exercise_id`) REFERENCES `exercise` (`id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+-- /*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --
+-- -- Dumping data for table `poses`
+-- --
+
+-- LOCK TABLES `poses` WRITE;
+-- /*!40000 ALTER TABLE `poses` DISABLE KEYS */;
+-- /*!40000 ALTER TABLE `poses` ENABLE KEYS */;
+-- UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -251,7 +253,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `hash_password` varchar(255) NOT NULL,
