@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `courses`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `courses` (
   `id` int NOT NULL,
-  `coursename` varchar(50) NOT NULL,
-  `image` blob,
+  `courseName` varchar(255) NOT NULL,
+  `image` text,
   `rating` int DEFAULT NULL,
-  `trainer` varchar(50) NOT NULL,
+  `trainer` varchar(255) NOT NULL,
   `difficulty` int NOT NULL,
   `isFavorite` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -52,13 +52,13 @@ DROP TABLE IF EXISTS `exercise`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `exercise` (
   `id` int NOT NULL,
-  `exercise_name` varchar(50) NOT NULL,
+  `exercise_name` varchar(255) NOT NULL,
   `duration` int NOT NULL,
-  `duration_type` varchar(50) NOT NULL,
-  `decription` varchar(500) NOT NULL,
+  `duration_type` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   `difficulty` varchar(15) NOT NULL,
   `rating` int DEFAULT NULL,
-  `image` blob,
+  `image` text,
   `lesson_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `lesson_id` (`lesson_id`),
@@ -136,13 +136,13 @@ DROP TABLE IF EXISTS `lessons`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `lessons` (
   `id` int NOT NULL,
-  `lesson_name` varchar(50) NOT NULL,
+  `lesson_name` varchar(255) NOT NULL,
   `duration` int NOT NULL,
-  `lesson_type` varchar(50) NOT NULL,
-  `decription` varchar(500) NOT NULL,
-  `difficulty` varchar(15) NOT NULL,
-  `trainer` varchar(50) NOT NULL,
-  `image` blob,
+  `lesson_type` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `difficulty` varchar(255) NOT NULL,
+  `trainer` varchar(255) NOT NULL,
+  `image` text,
   `course_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `course_id` (`course_id`),
@@ -168,11 +168,11 @@ DROP TABLE IF EXISTS `meals`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `meals` (
   `id` int NOT NULL,
-  `meal_name` varchar(50) NOT NULL,
+  `meal_name` varchar(255) NOT NULL,
   `duration` int NOT NULL,
-  `image` blob,
-  `meal_type` varchar(50) NOT NULL,
-  `decription` varchar(500) NOT NULL,
+  `image` text,
+  `meal_type` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   `isFavourite` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -224,9 +224,9 @@ DROP TABLE IF EXISTS `poses`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `poses` (
   `id` int NOT NULL,
-  `pose_name` varchar(50) NOT NULL,
+  `pose_name` varchar(255) NOT NULL,
   `duration` int NOT NULL,
-  `image` blob,
+  `image` text,
   `exercise_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `exercise_id` (`exercise_id`),
@@ -252,10 +252,10 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` int NOT NULL,
-  `username` varchar(15) NOT NULL,
-  `email` varchar(30) NOT NULL,
-  `hash_password` varchar(15) NOT NULL,
-  `picture` blob,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `hash_password` varchar(255) NOT NULL,
+  `picture` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
