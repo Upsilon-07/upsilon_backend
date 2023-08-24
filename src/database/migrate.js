@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { log } = require("console");
 const fs = require("fs");
 const mysql = require("mysql2/promise");
 
@@ -26,6 +27,7 @@ const migrate = async () => {
 
 try {
   migrate();
+  console.log("DB reset completed!")
 } catch (err) {
   console.error(err);
 }
