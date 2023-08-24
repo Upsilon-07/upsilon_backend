@@ -29,7 +29,6 @@ CREATE TABLE `courses` (
   `rating` int DEFAULT NULL,
   `trainer` varchar(255) NOT NULL,
   `difficulty` int NOT NULL,
-  `isFavorite` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -173,7 +172,6 @@ CREATE TABLE `meals` (
   `image` text,
   `meal_type` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `isFavourite` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
