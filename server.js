@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config()
 
 const { setupRoutes} = require("./src/routes/index.routes")
 
