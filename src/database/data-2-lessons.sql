@@ -2,15 +2,15 @@
 -- TABLE lessons
 -- Lessons for 'Beginner Yoga'
 INSERT INTO lessons (lesson_name, duration, lesson_type, description, difficulty, trainer, image, course_id) VALUES
-('Introduction to Yoga', 15, 'Tutorial', 'An introduction to basic yoga poses and breathing techniques.', 'Easy', 'Emily Smith', 'beginner_yoga_lesson1.jpg', 1),
-('Sun Salutations', 20, 'Flow', 'Learn the classic sequence of sun salutations to warm up your body.', 'Easy', 'Emily Smith', 'beginner_yoga_lesson2.jpg', 1),
-('Basic Standing Poses', 25, 'Tutorial', 'Practice foundational standing yoga poses for strength and balance.', 'Easy', 'Emily Smith', 'beginner_yoga_lesson3.jpg', 1);
+('Introduction to Yoga', 15, 'Tutorial', 'An introduction to basic yoga poses and breathing techniques.', 'Easy', 'Emily Smith', 'https://www.pngitem.com/pimgs/m/171-1714022_woman-yoga-png-yoga-vector-png-transparent-png.png', 1),
+('Sun Salutations', 20, 'Flow', 'Learn the classic sequence of sun salutations to warm up your body.', 'Easy', 'Emily Smith', 'https://us.123rf.com/450wm/lioputra/lioputra2208/lioputra220800223/190239803-man-doing-crescent-lunge-pose-or-anjaneyasana-exercise-flat-vector-illustration-isolated-on-white.jpg?ver=6', 1),
+('Basic Standing Poses', 25, 'Tutorial', 'Practice foundational standing yoga poses for strength and balance.', 'Easy', 'Emily Smith', 'https://st4.depositphotos.com/11953928/25654/v/450/depositphotos_256549610-stock-illustration-fit-man-practicing-yoga.jpg', 1);
 
 -- Lessons for 'Intermediate Flow'
 INSERT INTO lessons (lesson_name, duration, lesson_type, description, difficulty, trainer, image, course_id) VALUES
-('Energizing Sequence', 30, 'Flow', 'A dynamic sequence of poses to build strength and flexibility.', 'Intermediate', 'Michael Johnson', 'intermediate_flow_lesson1.jpg', 2),
-('Arm Balances', 40, 'Tutorial', 'Learn various arm balances and techniques to achieve them.', 'Intermediate', 'Michael Johnson', 'intermediate_flow_lesson2.jpg', 2),
-('Backbend Workshop', 35, 'Workshop', 'Explore backbending poses with proper alignment and support.', 'Intermediate', 'Michael Johnson', 'intermediate_flow_lesson3.jpg', 2);
+('Energizing Sequence', 30, 'Flow', 'A dynamic sequence of poses to build strength and flexibility.', 'Intermediate', 'Michael Johnson', 'https://cdn-icons-png.flaticon.com/512/2789/2789816.png', 2),
+('Arm Balances', 40, 'Tutorial', 'Learn various arm balances and techniques to achieve them.', 'Intermediate', 'Michael Johnson', 'https://cdn-icons-png.flaticon.com/512/2789/2789833.png', 2),
+('Backbend Workshop', 35, 'Workshop', 'Explore backbending poses with proper alignment and support.', 'Intermediate', 'Michael Johnson', 'https://cdn-icons-png.flaticon.com/512/2789/2789935.png', 2);
 
 -- Lessons for 'Power Yoga Sculpt'
 INSERT INTO lessons (lesson_name, duration, lesson_type, description, difficulty, trainer, image, course_id) VALUES
