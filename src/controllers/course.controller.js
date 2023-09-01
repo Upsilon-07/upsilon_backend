@@ -59,8 +59,19 @@ const getAllLessonsByCourseId = (req, res) => {
     
 };
 
+const postIsFavourite=(req,res)=>{
+  
+  console.log(req.body);
+
+    // if not exists in DB add row with course_id and user_id
+    // if exists in DB delete
+  
+  // Course.postById()
+}
+
 
 module.exports={
     getAllCourses,
-    getAllLessonsByCourseId
+    getAllLessonsByCourseId,
+    postIsFavourite
 }

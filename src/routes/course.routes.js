@@ -1,4 +1,3 @@
-
 const courseRouter = require("express").Router()
 const CourseController = require("../controllers/course.controller")
 
