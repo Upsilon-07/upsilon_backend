@@ -4,7 +4,7 @@ const argon2 = require("argon2");
 const { forgetPasswordSendEmail } = require("../helpers/sendEmail");
 
 const changePassword = (req, res) => {
-  Password.change(req.body.hashedPassword, req.body.email)
+  Password.change(req.body.hash_password, req.body.email)
     .then((results) => {
       if (results.affectedRows > 0) {
         res.status(200).send("Your password has been changed");
@@ -34,9 +34,9 @@ const forgetPassword = (req, res) => {
   };
   argon2
     .hash(temporaryPassword, hashingOptions)
-    .then((hashedPassword) => {
+    .then((hash_password) => {
       //* change on DB
-      Password.change(hashedPassword, email)
+      Password.change(hash_password, email)
         .then(async (results) => {
           if (results.affectedRows > 0) {
             //* send temporary password by email

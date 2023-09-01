@@ -29,11 +29,7 @@ const login = (req, res) => {
     const { id, email } = req.user;
 
     const token = jwt.sign(
-      {
-        userId: id,
-        sub: email,
-        exp: Math.floor((Date.now() + 1000 * 60 * 60 * 24 * 90) / 1000),
-      },
+      { userId: id, sub: email, exp: Math.floor((Date.now() + 1000 * 60 * 60 * 24 * 90) / 1000) },
       process.env.PRIVATE_KEY
     );
 
@@ -41,28 +37,34 @@ const login = (req, res) => {
       message: "success",
       token: token,
     });
+
   } else {
     res.status(404).send("Invalid credentials");
   }
 };
 
 const getUserInfo = (req, res) => {
-  const { email } = req.body;
+  //* get email after middleware to verify token
+  const {email} = req.body
 
+  //* create the model to get user info by email
   User.findUserToLogin(email)
-    .then((user) => {
-      if (user[0] !== null && user[0].email === email) {
-        delete user[0].hashedPassword;
-        res.status(200).send(user[0]);
+    .then(user => {
+      if(user[0] !== null && user[0].email === email) {
+        delete user[0].hash_password
+        res.status(200).send(user[0])
       } else {
-        res.status(404).send("User not found with email: " + email);
+        res.status(404).send("User not found with email: " + email)
       }
     })
-    .catch((error) => {
+    .catch(error => {
       console.error(error);
-      res.status(500).send("Error retrieving user info form DB");
-    });
-};
+      res.status(500).send("Error retrieving user info form DB")
+    })
+
+
+
+}
 
 module.exports = {
   createUser,

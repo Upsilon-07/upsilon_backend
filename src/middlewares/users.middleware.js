@@ -2,6 +2,7 @@ const argon2 = require("argon2");
 const User = require("../models/users.model");
 const jwt = require("jsonwebtoken")
 
+//! password middlewares
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -11,18 +12,18 @@ const hashingOptions = {
 };
 
 const hashPassword = (req, res, next) => {
-//   if(req.body.newPassword !== null && req.body.newPassword !== undefined){
-//     req.body.password = req.body.newPassword
-//   }
+  if(req.body.newPassword !== null && req.body.newPassword !== undefined){
+    req.body.password = req.body.newPassword
+  }
   argon2
     .hash(req.body.password, hashingOptions)
-    .then((hashedPassword) => {
+    .then((hash_password) => {
       delete req.body.password;
 
-    //   if(req.body.newPassword !== null){
-    //     delete req.body.newPassword
-    //   }
-      req.body.hash_password = hashedPassword;
+      if(req.body.newPassword !== null){
+        delete req.body.newPassword
+      }
+      req.body.hash_password = hash_password;
 
       next();
     })
@@ -39,10 +40,10 @@ const verifyPassword = (req, res, next) => {
       if (user !== null && user.length > 0) {
         //* verify password
         argon2
-          .verify(user[0].hashedPassword, req.body.password)
+          .verify(user[0].hash_password, req.body.password)
           .then((isVerified) => {
             if (isVerified) {
-              delete user[0].hashedPassword;
+              delete user[0].hash_password;
               req.user = user[0];
               next();
             } else {
@@ -63,6 +64,7 @@ const verifyPassword = (req, res, next) => {
     });
 };
 
+//! email middlewares
 
 const verifyEmailToCreateUser = (req, res, next) => {
   User.findUserByEmail(req.body.email)
