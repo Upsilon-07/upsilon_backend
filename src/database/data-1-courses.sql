@@ -2,8 +2,8 @@
 -- TABLE courses
 -- replace images with the corresponding image url
 INSERT INTO courses (courseName, image, rating, trainer, difficulty) VALUES
-('Beginner Yoga', 'https://www.svgrepo.com/show/16702/yoga.svg', 4, 'Emily Smith', 1),
-('Intermediate Flow', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKtiazZINLZguDNVzY5OwJ5HzuYyVR79gtdw&usqp=CAU.jpg', 4, 'Michael Johnson', 2),
+('Beginner Yoga', 'https://www.pngitem.com/pimgs/m/171-1714022_woman-yoga-png-yoga-vector-png-transparent-png.png', 4, 'Emily Smith', 1),
+('Intermediate Flow', 'https://www.lexiyoga.com/svg/yoga-styles/hatha-yoga.svg', 4, 'Michael Johnson', 2),
 ('Power Yoga Sculpt', 'https://www.svgrepo.com/show/42633/yoga.svg', 5, 'Jessica Williams', 3),
 ('Restorative Yoga', 'https://cdni.iconscout.com/illustration/premium/thumb/man-doing-yoga-4974821-4136959.png', 4, 'David Lee', 1),
 ('Vinyasa Flow', 'https://cdn.pixabay.com/photo/2020/08/17/08/33/power-yoga-5494708_1280.png', 3, 'Sophia Miller', 2),

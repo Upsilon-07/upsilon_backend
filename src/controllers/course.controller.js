@@ -27,6 +27,51 @@ const getAllCourses = (req,res) =>{
     })
 }
 
+const getAllLessonsByCourseId = (req, res) => {
+  const id = Number(req.params.id);
+
+  Course.getById(id).then((lessons) => {
+    
+    if (lessons !== null && lessons.length > 0) {
+      console.log("lessons")
+      Course.getCourseTitle(id)
+      .then(courseTitle =>{
+        console.log(courseTitle);
+        if(courseTitle !== null && courseTitle.length > 0){
+          res.status(200).send({courseTitle, lessons});
+        } else {
+          res.status(404).send("course title not found in DB")
+        }
+      })
+      .catch((err)=>{
+        console.error(err);
+        res.status(500).send("Error retrieving all lessons per course.")
+      })
+      // res.status(200).send(lessons);
+    } else {
+      res.status(404).send(`No lessons found with id: ${id}`);
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send("Error retrieving lesson by id from db.");
+  });
+    
+};
+
+const postIsFavourite=(req,res)=>{
+  
+  console.log(req.body);
+
+    // if not exists in DB add row with course_id and user_id
+    // if exists in DB delete
+  
+  // Course.postById()
+}
+
+
 module.exports={
-    getAllCourses
+    getAllCourses,
+    getAllLessonsByCourseId,
+    postIsFavourite
 }
