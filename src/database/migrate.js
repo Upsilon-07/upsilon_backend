@@ -20,14 +20,19 @@ const migrate = async () => {
   await connection.query(courses);
   const lessons = fs.readFileSync("./src/database/data-2-lessons.sql", "utf8");
   await connection.query(lessons);
-  const exercises = fs.readFileSync("./src/database/data-3-exercises.sql", "utf8");
+  const exercises = fs.readFileSync(
+    "./src/database/data-3-exercises.sql",
+    "utf8"
+  );
   await connection.query(exercises);
+  const users = fs.readFileSync("./src/database/data-4-users.sql", "utf8");
+  await connection.query(users);
   connection.end();
 };
 
 try {
   migrate();
-  console.log("DB reset completed!")
+  console.log("DB reset completed!");
 } catch (err) {
   console.error(err);
 }

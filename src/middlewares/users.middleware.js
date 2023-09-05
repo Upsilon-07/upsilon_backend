@@ -1,7 +1,6 @@
 const argon2 = require("argon2");
 const User = require("../models/users.model");
-const jwt = require("jsonwebtoken")
-
+const jwt = require("jsonwebtoken");
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -11,17 +10,17 @@ const hashingOptions = {
 };
 
 const hashPassword = (req, res, next) => {
-//   if(req.body.newPassword !== null && req.body.newPassword !== undefined){
-//     req.body.password = req.body.newPassword
-//   }
+  //   if(req.body.newPassword !== null && req.body.newPassword !== undefined){
+  //     req.body.password = req.body.newPassword
+  //   }
   argon2
     .hash(req.body.password, hashingOptions)
     .then((hashedPassword) => {
       delete req.body.password;
 
-    //   if(req.body.newPassword !== null){
-    //     delete req.body.newPassword
-    //   }
+      //   if(req.body.newPassword !== null){
+      //     delete req.body.newPassword
+      //   }
       req.body.hash_password = hashedPassword;
 
       next();
@@ -36,13 +35,16 @@ const verifyPassword = (req, res, next) => {
   //* get the user hashedPassword
   User.findUserToLogin(req.body.email)
     .then((user) => {
+      console.log(user);
+      console.log(req.body);
+
       if (user !== null && user.length > 0) {
         //* verify password
         argon2
-          .verify(user[0].hashedPassword, req.body.password)
+          .verify(user[0].hash_password, req.body.password)
           .then((isVerified) => {
             if (isVerified) {
-              delete user[0].hashedPassword;
+              delete user[0].hash_password;
               req.user = user[0];
               next();
             } else {
@@ -62,7 +64,6 @@ const verifyPassword = (req, res, next) => {
       res.status(500).send("Error retrieving user from db");
     });
 };
-
 
 const verifyEmailToCreateUser = (req, res, next) => {
   User.findUserByEmail(req.body.email)
@@ -100,29 +101,27 @@ const verifyEmail = (req, res, next) => {
 
 const verifyToken = (req, res, next) => {
   const authorizationHeader = req.get("Authorization");
-  
+
   if (authorizationHeader === null) {
     res.status(403).send("Authorization header is missing");
   }
 
   const [type, token] = authorizationHeader.split(" ");
-  
+
   if (type !== "Bearer") {
     res.status(403).send("Authorization header has not the 'Bearer' type");
   }
 
-  jwt.verify(token, process.env.PRIVATE_KEY, (error,decoded)=>{
-    if(error){
+  jwt.verify(token, process.env.PRIVATE_KEY, (error, decoded) => {
+    if (error) {
       console.error(error);
-      res.status(403).send("Error decoding authorization header")
+      res.status(403).send("Error decoding authorization header");
     } else {
+      req.body.email = decoded.sub;
 
-      req.body.email = decoded.sub
-      
-      next()
+      next();
     }
-  })
-
+  });
 };
 
 module.exports = {
