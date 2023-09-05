@@ -52,7 +52,7 @@ const getUserInfo = (req, res) => {
   User.findUserToLogin(email)
     .then((user) => {
       if (user[0] !== null && user[0].email === email) {
-        delete user[0].hashedPassword;
+        delete user[0].hash_password;
         res.status(200).send(user[0]);
       } else {
         res.status(404).send("User not found with email: " + email);
