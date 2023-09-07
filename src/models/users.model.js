@@ -18,10 +18,18 @@ const findUserToLogin = (email) => {
     .then(([results]) => results);
 };
 
+const editUser = (id, body) => {
+  
+  return database
+  .query("UPDATE users SET ? WHERE id=?", [body, id])
+  .then(([results]) => results);
+
+}
 
 
 module.exports = {
   createNewUser,
   findUserByEmail,
   findUserToLogin,
+  editUser,
 };
