@@ -24,9 +24,13 @@ const getCourseTitle = (id) => {
     .then(([results]) => results);
 };
 
+
+
 module.exports = {
   getAll,
   getNumberLessonsPerCourse,
   getById,
   getCourseTitle,
+ 
+  
 };

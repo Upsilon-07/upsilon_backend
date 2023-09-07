@@ -2,6 +2,6 @@ const courseRouter = require("express").Router()
 const CourseController = require("../controllers/course.controller")
 
 courseRouter.get("/",CourseController.getAllCourses)
-courseRouter.get("/:id",CourseController.getAllLessonsByCourseId)
+courseRouter.post("/:id",CourseController.getAllLessonsByCourseId)
 
 module.exports = courseRouter

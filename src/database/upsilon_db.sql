@@ -83,11 +83,11 @@ DROP TABLE IF EXISTS `favourite_courses`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favourite_courses` (
   `course_id` int DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  KEY `course_id` (`course_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `favourite_courses_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
-  CONSTRAINT `favourite_courses_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  `user_id` int DEFAULT NULL
+  -- KEY `course_id` (`course_id`),
+  -- KEY `user_id` (`user_id`),
+  -- CONSTRAINT `favourite_courses_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
+  -- CONSTRAINT `favourite_courses_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -109,11 +109,11 @@ DROP TABLE IF EXISTS `favourite_meals`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favourite_meals` (
   `meal_id` int DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  KEY `meal_id` (`meal_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `favourite_meals_ibfk_1` FOREIGN KEY (`meal_id`) REFERENCES `meals` (`id`),
-  CONSTRAINT `favourite_meals_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  `user_id` int DEFAULT NULL
+  -- KEY `meal_id` (`meal_id`),
+  -- KEY `user_id` (`user_id`),
+  -- CONSTRAINT `favourite_meals_ibfk_1` FOREIGN KEY (`meal_id`) REFERENCES `meals` (`id`),
+  -- CONSTRAINT `favourite_meals_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
