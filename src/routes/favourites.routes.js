@@ -1,10 +1,11 @@
 
 const favouritesRouter = require("express").Router()
-const CourseController = require("../controllers/course.controller")
+const FavouritesController = require("../controllers/favourite.controller")
 
 //* /favourites/courses
 //endpoint:/favourites/courses
-favouritesRouter.post("/courses",CourseController.postIsFavourite)
+favouritesRouter.post("/courses",FavouritesController.postIsFavourite)
+favouritesRouter.get("/courses", FavouritesController.getFavouriteCourses)
 
 //* /favourites/meals
 // favouritesRouter.post("/meals",MealController.postIsFavourite)

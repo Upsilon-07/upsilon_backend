@@ -24,8 +24,33 @@ const deleteFavourite = (userID, courseID) => {
     .then(([results]) => results);
 };
 
+// const getAllFavouriteCourses = () => {
+//     return database
+//       .query(`
+//         SELECT courseName, image, rating, trainer, difficulty, user_id
+//         FROM courses 
+//         INNER JOIN favourite_courses ON course_id = id
+//       `)
+//       .then(([results]) => results);
+//   };
+
+  const getAllFavouriteCoursesByUser = (userId) => {
+    return database
+      .query('SELECT c.*, fc.user_id FROM courses c JOIN favourite_courses fc ON c.id = fc.course_id WHERE fc.user_id = ?', [userId])
+      .then(([results]) => results);
+  };
+
+
+  const getCourseIfIsFavouriteByUser = (courseId, userId) => {
+    return database.query("Select * from favourite_courses WHERE course_id = ? AND user_id = ?", [courseId, userId])
+      .then(([results]) => results);
+
+  }
+
 module.exports = {
   checkIfFavouriteExists,
   deleteFavourite,
   createNewFavourite,
+  getAllFavouriteCoursesByUser,
+  getCourseIfIsFavouriteByUser,
 };
