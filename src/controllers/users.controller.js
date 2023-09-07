@@ -60,7 +60,8 @@ const getUserInfo = (req, res) => {
     })
     .catch((error) => {
       console.error(error);
-      res.status(500).send("Error retrieving user info form DB");
+      res.status(500).send("Error retrieving user info fro
+      m DB");
     });
 };
 

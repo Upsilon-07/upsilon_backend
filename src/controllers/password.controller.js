@@ -1,10 +1,10 @@
 const Password = require("../models/password.model");
 const randomString = require("randomstring");
 const argon2 = require("argon2");
-const { forgetPasswordSendEmail } = require("../helpers/sendEmail");
+const { forgotPasswordSendEmail } = require("../helpers/sendEmail");
 
 const changePassword = (req, res) => {
-  Password.change(req.body.hashedPassword, req.body.email)
+  Password.change(req.body.hash_password, req.body.email)
     .then((results) => {
       if (results.affectedRows > 0) {
         res.status(200).send("Your password has been changed");
@@ -18,7 +18,7 @@ const changePassword = (req, res) => {
     });
 };
 
-const forgetPassword = (req, res) => {
+const forgotPassword = (req, res) => {
   //* email came from frontend
   const { email } = req.body;
 
@@ -34,15 +34,15 @@ const forgetPassword = (req, res) => {
   };
   argon2
     .hash(temporaryPassword, hashingOptions)
-    .then((hashedPassword) => {
+    .then((hashPassword) => {
       //* change on DB
-      Password.change(hashedPassword, email)
+      Password.change(hashPassword, email)
         .then(async (results) => {
           if (results.affectedRows > 0) {
             //* send temporary password by email
             let subject = "Temporary Password";
 
-            forgetPasswordSendEmail(email, subject, temporaryPassword)
+            forgotPasswordSendEmail(email, subject, temporaryPassword)
               .then((info) => {
                 if (info.accepted !== null && info.accepted.length > 0) {
                   res
@@ -75,5 +75,5 @@ const forgetPassword = (req, res) => {
 
 module.exports = {
   changePassword,
-  forgetPassword,
+  forgotPassword,
 };

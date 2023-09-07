@@ -10,18 +10,18 @@ const hashingOptions = {
 };
 
 const hashPassword = (req, res, next) => {
-  //   if(req.body.newPassword !== null && req.body.newPassword !== undefined){
-  //     req.body.password = req.body.newPassword
-  //   }
+     if(req.body.newPassword !== null && req.body.newPassword !== undefined){
+       req.body.password = req.body.newPassword
+    }
   argon2
     .hash(req.body.password, hashingOptions)
-    .then((hashedPassword) => {
+    .then((hash_password) => {
       delete req.body.password;
 
-      //   if(req.body.newPassword !== null){
-      //     delete req.body.newPassword
-      //   }
-      req.body.hash_password = hashedPassword;
+        if(req.body.newPassword !== null){
+           delete req.body.newPassword
+        }
+      req.body.hash_password = hash_password;
 
       next();
     })
