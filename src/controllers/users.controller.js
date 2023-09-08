@@ -65,8 +65,28 @@ const getUserInfo = (req, res) => {
     });
 };
 
+const editUserInfo = (req, res) => {
+  const id = Number(req.params.id);
+
+  const { body } = req;
+
+  User.editUser(id, body)
+    .then((results) => {
+      if (results.changedRows > 0) {
+        res.status(200).send("User successfully updated");
+      } else {
+        res.status(404).send(`User not found with id: ${id}`);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error editing user in the DB");
+    });
+};
+
 module.exports = {
   createUser,
   login,
   getUserInfo,
+  editUserInfo,
 };

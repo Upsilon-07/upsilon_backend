@@ -35,6 +35,9 @@ const verifyPassword = (req, res, next) => {
   //* get the user hashedPassword
   User.findUserToLogin(req.body.email)
     .then((user) => {
+      // console.log(user);
+      // console.log(req.body);
+
       if (user !== null && user.length > 0) {
         //* verify password
         argon2

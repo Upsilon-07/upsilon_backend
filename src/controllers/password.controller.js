@@ -20,6 +20,8 @@ const changePassword = async (req, res) => {
 
 const generateTemporaryPassword = async () => {
   const temporaryPassword = randomString.generate();
+  // console.log(temporaryPassword);
+  //* hash the temporary password
   const hashingOptions = {
     type: argon2.argon2id,
     memoryCost: 2 ** 16,
