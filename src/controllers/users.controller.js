@@ -24,25 +24,26 @@ const createUser = (req, res) => {
 };
 
 const login = (req, res) => {
-  if (req.user !== null && Object.keys(req.user).length > 0) {
-    //! generate the jwt token
-    const { id, email } = req.user;
+  const user = req.user;
+
+  if (user && Object.keys(user).length > 0) {
+    const { id, email } = user;
 
     const token = jwt.sign(
       {
         userId: id,
         sub: email,
-        exp: Math.floor((Date.now() + 1000 * 60 * 60 * 24 * 90) / 1000),
+        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 90, // 90 days expiration
       },
       process.env.PRIVATE_KEY
     );
 
-    res.status(200).send({
+    res.status(200).json({
       message: "success",
       token: token,
     });
   } else {
-    res.status(404).send("Invalid credentials");
+    res.status(401).send("Invalid credentials");
   }
 };
 
@@ -60,7 +61,7 @@ const getUserInfo = (req, res) => {
     })
     .catch((error) => {
       console.error(error);
-      res.status(500).send("Error retrieving user info form DB");
+      res.status(500).send("Error retrieving user info from DB");
     });
 };
 

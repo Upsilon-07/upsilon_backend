@@ -10,18 +10,18 @@ const hashingOptions = {
 };
 
 const hashPassword = (req, res, next) => {
-  //   if(req.body.newPassword !== null && req.body.newPassword !== undefined){
-  //     req.body.password = req.body.newPassword
-  //   }
+     if(req.body.newPassword !== null && req.body.newPassword !== undefined){
+       req.body.password = req.body.newPassword
+    }
   argon2
     .hash(req.body.password, hashingOptions)
-    .then((hashedPassword) => {
+    .then((hash_password) => {
       delete req.body.password;
 
-      //   if(req.body.newPassword !== null){
-      //     delete req.body.newPassword
-      //   }
-      req.body.hash_password = hashedPassword;
+        if(req.body.newPassword !== null){
+           delete req.body.newPassword
+        }
+      req.body.hash_password = hash_password;
 
       next();
     })
@@ -88,7 +88,7 @@ const verifyEmail = (req, res, next) => {
       } else {
         res
           .status(401)
-          .send("This email is not register, please create an account!");
+          .send("This email is not registered, please create an account!");
       }
     })
     .catch((error) => {
@@ -102,27 +102,34 @@ const verifyEmail = (req, res, next) => {
 const verifyToken = (req, res, next) => {
   const authorizationHeader = req.get("Authorization");
 
-  if (authorizationHeader === null) {
-    res.status(403).send("Authorization header is missing");
+  if (!authorizationHeader) {
+    return res.status(401).send("Authorization header is missing");
   }
 
   const [type, token] = authorizationHeader.split(" ");
 
   if (type !== "Bearer") {
-    res.status(403).send("Authorization header has not the 'Bearer' type");
+    return res.status(401).send("Authorization header has the wrong token type");
   }
 
   jwt.verify(token, process.env.PRIVATE_KEY, (error, decoded) => {
     if (error) {
       console.error(error);
-      res.status(403).send("Error decoding authorization header");
-    } else {
-      req.body.email = decoded.sub;
 
-      next();
+      if (error.name === 'TokenExpiredError') {
+        return res.status(401).send("Token has expired");
+      } else if (error.name === 'JsonWebTokenError') {
+        return res.status(401).send("Invalid token");
+      } else {
+        return res.status(500).send("Error decoding authorization header");
+      }
     }
+
+    req.body.email = decoded.sub;
+    next();
   });
 };
+
 
 module.exports = {
   hashPassword,
