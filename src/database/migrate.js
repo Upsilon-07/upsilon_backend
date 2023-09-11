@@ -27,6 +27,10 @@ const migrate = async () => {
   await connection.query(exercises);
   const users = fs.readFileSync("./src/database/data-4-users.sql", "utf8");
   await connection.query(users);
+  const meals = fs.readFileSync("./src/database/data-5-meals.sql", "utf8");
+  await connection.query(meals);
+  const nutrition = fs.readFileSync("./src/database/data-6-nutrition.sql", "utf8");
+  await connection.query(nutrition);
   connection.end();
 };
 
