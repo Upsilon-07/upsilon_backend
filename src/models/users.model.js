@@ -18,6 +18,12 @@ const findUserToLogin = (email) => {
     .then(([results]) => results);
 };
 
+const findUserToUpdate = (user) => {
+  return database
+    .query("SELECT * FROM users WHERE ?", user)
+    .then(([results]) => results);
+};
+
 const editUser = (id, body) => {
   
   return database
@@ -32,4 +38,5 @@ module.exports = {
   findUserByEmail,
   findUserToLogin,
   editUser,
+  findUserToUpdate,
 };
