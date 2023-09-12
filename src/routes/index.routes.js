@@ -4,6 +4,7 @@ const courseRouter = require("./course.routes");
 const authRouter = require("./auth.routes");
 const usersRouter = require("./users.routes");
 const favouritesRouter = require("./favourites.routes");
+const passwordRoutes = require("./password.routes")
 const mealRouter = require("./meal.routes");
 const lessonRouter = require("./lesson.routes");
 const setupRoutes = (server) => {
@@ -12,6 +13,7 @@ const setupRoutes = (server) => {
   server.use("/auth", authRouter);
   server.use("/favourites", favouritesRouter);
   server.use("/user", usersRouter);
+  server.use("/password", passwordRoutes);
   server.use("/meals", mealRouter);
   server.use("/lesson",lessonRouter)
 };

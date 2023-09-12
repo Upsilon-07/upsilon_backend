@@ -3,7 +3,7 @@
 -- Exercises for 'Introduction to Yoga'
 INSERT INTO exercise (exercise_name, duration, duration_type, description, difficulty, image, lesson_id) VALUES
 ('Mountain Pose', 30, 'seconds', 'Stand tall with feet together, arms at your sides, and focus on steady breathing.', 'Easy', 'https://www.yogaclassplan.com/wp-content/uploads/2021/06/mountain.jpg', 1),
-('Deep Breathing', 5, 'minutes', 'Practice deep diaphragmatic breathing to relax the body and mind.', 'Easy', 'https://www.artofliving.org/sites/www.artofliving.org/files/styles/original_image/public/unity2/blog_image/breathing.jpg?itok=AYoqgfFy', 1),
+('Deep Breathing', 5, 'minutes', 'Practice deep diaphragmatic breathing to relax the body and mind.', 'Easy', 'https://media.istockphoto.com/id/1388104915/vector/dark-black-skin-female-with-crossed-legs-and-closed-eyes-doing-diaphragm-breathing-black.jpg?s=612x612&w=0&k=20&c=yvmCTqHxbn5pIL3AbtTGmcVRD1dEBS6YSPJckJjkhw8=', 1),
 ('Child''s Pose', 45, 'seconds', 'Kneel on the floor, touch your big toes together, and sit on your heels. Stretch your arms forward and rest your forehead on the ground.', 'Easy', 'https://media.istockphoto.com/id/1264822134/vector/vector-illustration-of-yoga-pose.jpg?s=612x612&w=0&k=20&c=HhRxmPiXzryeaI9rIh6BnE2kc3EzlWWoYCyTVknNNqs=', 1);
 
 -- Exercises for 'Sun Salutations'
