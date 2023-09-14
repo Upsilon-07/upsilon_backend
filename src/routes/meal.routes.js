@@ -12,9 +12,6 @@ mealRouter.get("/", MealController.getAllMeals)
 mealRouter.get("/:id", MealController.getMealbyId)
 
 
-// //* get all meals by meal_type
-// //* endpoint: /meals/:meal_type
-// mealRouter.get("/:meal_type", MealController.getMealByMealType)
 
 
 
