@@ -8,6 +8,7 @@ const passwordRoutes = require("./password.routes")
 const mealRouter = require("./meal.routes");
 const lessonRouter = require("./lesson.routes");
 const exerciseRouter = require("./exercise.routes")
+const nutritionRouter = require("./nutrition.routes")
 
 
 const setupRoutes = (server) => {
@@ -20,6 +21,7 @@ const setupRoutes = (server) => {
   server.use("/meals", mealRouter);
   server.use("/lesson",lessonRouter)
   server.use("/exercise",exerciseRouter)
+  server.use("/nutrition", nutritionRouter)
 };
 
 module.exports = { setupRoutes };
