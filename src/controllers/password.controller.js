@@ -4,7 +4,7 @@ const argon2 = require("argon2");
 const {forgetPasswordSendEmail} = require("../helpers/sendEmail")
 
 const changePassword = (req, res) => {
-  Password.change(req.body.hashedPassword, req.body.email)
+  Password.change(req.body.hash_password, req.body.email)
     .then((results) => {
       if (results.affectedRows > 0) {
         res.status(200).send("Your password has been changed");
