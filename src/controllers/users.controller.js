@@ -70,9 +70,12 @@ const editUserInfo = (req, res) => {
 
   const { body } = req;
 
+  console.log(id, body);
+
   User.editUser(id, body)
     .then((results) => {
-      if (results.changedRows > 0) {
+      console.log(results);
+      if (results.affectedRows > 0) {
         res.status(200).send("User successfully updated");
       } else {
         res.status(404).send(`User not found with id: ${id}`);
