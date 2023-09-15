@@ -70,11 +70,11 @@ const editUserInfo = (req, res) => {
 
   const { body } = req;
 
-  console.log(id, body);
+  // console.log(id, body);
 
   User.editUser(id, body)
     .then((results) => {
-      console.log(results);
+      // console.log(results);
       if (results.affectedRows > 0) {
         res.status(200).send("User successfully updated");
       } else {
