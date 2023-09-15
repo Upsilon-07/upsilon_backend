@@ -3,8 +3,6 @@ const FavouritesMeal = require("../models/favouriteMeals.model");
 const postIsFavouriteMeal = (req, res) => {
  const { user_id, meal_id } = req.body;
 
-
-
   FavouritesMeal.checkIfFavouriteMealsExists(user_id, meal_id)
     .then((result) => {
       
@@ -46,13 +44,13 @@ const getFavouriteMeals = (req, res) => {
     
     FavouritesMeal.getAllFavouriteMealsByUser(req.query.userId)
     .then((favouriteMealsByUser) => {
-         console.log(favouriteMealsByUser)
+        //  console.log(favouriteMealsByUser)
       if (
         favouriteMealsByUser !== null &&
         favouriteMealsByUser.length > 0
       ) {
         const isFavouriteMeal = true
-         res.status(200).send({favouriteMealsByUser,isFavouriteMeal});
+         res.status(200).send(favouriteMealsByUser);
       } else {
         //const isFavourite = false
         res.status(404).send("No favourite meals found in DB");
