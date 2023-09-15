@@ -130,6 +130,44 @@ const verifyToken = (req, res, next) => {
   });
 };
 
+const verifyUserHasInfoInBody = (req, res, next) => {
+  // console.log(req.body);
+  User.findUserToUpdate(req.body)
+    .then((user) => {
+      if (!user) { // Check if user is null or undefined
+        res.status(401).send("User not found or has no user information");
+      } else {
+        // User found, go to the next middleware
+        next();
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error retrieving user data from db");
+    });
+}
+
+const verifyEmailToUpdateUser = (req, res, next) => {
+  // console.log(req.body);
+  User.findUserToUpdate(req.body.email)
+    .then((user) => {
+      // console.log(user);
+      if (user !== null && user.length > 0) {
+        // Check if the user is the same as the current user
+        if (user[0].id === user.id) {
+          next(); // Same user, allow email update
+        } else {
+          res.status(401).send("This email is already in use by another user!");
+        }
+      } else {
+        next(); // Email is not in use, continue
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error retrieving data from db");
+    });
+  };
 
 module.exports = {
   hashPassword,
@@ -137,4 +175,6 @@ module.exports = {
   verifyPassword,
   verifyEmail,
   verifyToken,
+  verifyUserHasInfoInBody,
+  verifyEmailToUpdateUser,
 };
