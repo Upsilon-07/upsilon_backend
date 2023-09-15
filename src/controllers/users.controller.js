@@ -49,7 +49,7 @@ const login = (req, res) => {
 
 const getUserInfo = (req, res) => {
   const { email } = req.body;
-
+  
   User.findUserToLogin(email)
     .then((user) => {
       if (user[0] !== null && user[0].email === email) {
