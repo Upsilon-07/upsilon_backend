@@ -33,7 +33,7 @@ const deleteFavouriteMeal = (userID, mealID) => {
 
 
   const getMealIfIsFavouriteByUser = (mealId, userId) => {
-    return database.query("Select * from favourite_meals WHERE meal_id = ? AND user_id = ?", [mealId, mealId])
+    return database.query("Select * from favourite_meals WHERE meal_id = ? AND user_id = ?", [mealId, userId])
       .then(([results]) => results);
 
   }
