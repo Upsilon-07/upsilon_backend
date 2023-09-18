@@ -35,8 +35,6 @@ const verifyPassword = (req, res, next) => {
   //* get the user hashedPassword
   User.findUserToLogin(req.body.email)
     .then((user) => {
-      // console.log(user);
-      // console.log(req.body);
 
       if (user !== null && user.length > 0) {
         //* verify password
@@ -48,7 +46,7 @@ const verifyPassword = (req, res, next) => {
               req.user = user[0];
               next();
             } else {
-              res.status(401).send("Invalid password");
+              res.status(401).send("Password and Email dont match");
             }
           })
           .catch((error) => {

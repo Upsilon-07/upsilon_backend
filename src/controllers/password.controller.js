@@ -23,8 +23,7 @@ const forgetPassword = (req, res) => {
   const { email } = req.body;
 
   //* generate new random password
-  const temporaryPassword = randomString.generate();
-  // console.log(temporaryPassword);
+  const temporaryPassword = randomString.generate() + "!";
   //* hash the temporary password
   const hashingOptions = {
     type: argon2.argon2id,
