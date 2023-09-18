@@ -24,7 +24,7 @@ const forgetPassword = (req, res) => {
 
   //* generate new random password
   const temporaryPassword = randomString.generate();
-  console.log(temporaryPassword);
+  // console.log(temporaryPassword);
   //* hash the temporary password
   const hashingOptions = {
     type: argon2.argon2id,

@@ -111,11 +111,9 @@ const verifyToken = (req, res, next) => {
   if (type !== "Bearer") {
     return res.status(401).send("Authorization header has the wrong token type");
   }
-
   jwt.verify(token, process.env.PRIVATE_KEY, (error, decoded) => {
     if (error) {
-      console.error(error);
-
+      // console.error(error);
       if (error.name === 'TokenExpiredError') {
         return res.status(401).send("Token has expired");
       } else if (error.name === 'JsonWebTokenError') {
