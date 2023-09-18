@@ -9,7 +9,7 @@ mealRouter.get("/", MealController.getAllMeals)
 
 //* get all meals by id
 //* endpoint: /meals/:id
-mealRouter.get("/:id", MealController.getMealbyId)
+mealRouter.post("/:id", MealController.getMealbyId)
 
 
 

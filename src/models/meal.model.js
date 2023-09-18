@@ -6,7 +6,7 @@ const getall = () => {
     .then(([results]) => results);
 };
 
-const getMealById = (id) => {
+const getMeal = (id) => {
   // console.log("id", id);
   return database
   .query("SELECT * FROM meals WHERE id=?", id)
@@ -16,5 +16,5 @@ const getMealById = (id) => {
 
 module.exports = {
   getall,
-  getMealById,
+  getMeal,
 };
