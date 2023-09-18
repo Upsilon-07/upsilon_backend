@@ -172,7 +172,7 @@ INSERT INTO exercise (exercise_name, duration, duration_type, description, diffi
 INSERT INTO exercise (exercise_name, duration, duration_type, description, difficulty, image, lesson_id) VALUES
 ('Head to Toe Body Scan', 10, 'minutes', 'Mentally scan your body from head to toe, noticing sensations along the way.', 'Easy', 'https://cdni.iconscout.com/illustration/premium/thumb/woman-doing-yoga-6275916-5220028.png?f=webp', 29),
 ('Progressive Muscle Relaxation', 12, 'minutes', 'Tense and release each muscle group, promoting relaxation and awareness.', 'Easy', 'https://health.clevelandclinic.org/wp-content/uploads/sites/3/2022/05/10WaysToEaseStress-1166219231-770x533-1.jpg', 29),
-('Breath Awareness Body Scan', 15, 'minutes', 'Combine body scan with breath awareness for a grounding meditation.', 'Easy', 'https://www.creativefabrica.com/wp-content/uploads/2021/11/30/Yoga-Illustration-Graphics-20985230-1-580x387.jpg', 29);
+('Breath Awareness Body Scan', 15, 'minutes', 'Combine body scan with breath awareness for a grounding meditation.', 'Easy', 'https://images.healthshots.com/healthshots/en/uploads/2022/05/14195152/meditation.jpg', 29);
 
 -- Exercises for 'Loving-kindness Meditation'
 INSERT INTO exercise (exercise_name, duration, duration_type, description, difficulty, image, lesson_id) VALUES
