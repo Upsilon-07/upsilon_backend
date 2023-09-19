@@ -10,18 +10,18 @@ const hashingOptions = {
 };
 
 const hashPassword = (req, res, next) => {
-  //   if(req.body.newPassword !== null && req.body.newPassword !== undefined){
-  //     req.body.password = req.body.newPassword
-  //   }
+     if(req.body.newPassword !== null && req.body.newPassword !== undefined){
+       req.body.password = req.body.newPassword
+    }
   argon2
     .hash(req.body.password, hashingOptions)
-    .then((hashedPassword) => {
+    .then((hash_password) => {
       delete req.body.password;
 
-      //   if(req.body.newPassword !== null){
-      //     delete req.body.newPassword
-      //   }
-      req.body.hash_password = hashedPassword;
+        if(req.body.newPassword !== null){
+           delete req.body.newPassword
+        }
+      req.body.hash_password = hash_password;
 
       next();
     })
@@ -35,8 +35,6 @@ const verifyPassword = (req, res, next) => {
   //* get the user hashedPassword
   User.findUserToLogin(req.body.email)
     .then((user) => {
-      // console.log(user);
-      // console.log(req.body);
 
       if (user !== null && user.length > 0) {
         //* verify password
@@ -48,7 +46,7 @@ const verifyPassword = (req, res, next) => {
               req.user = user[0];
               next();
             } else {
-              res.status(401).send("Invalid password");
+              res.status(401).send("Password and Email dont match");
             }
           })
           .catch((error) => {
@@ -88,7 +86,7 @@ const verifyEmail = (req, res, next) => {
       } else {
         res
           .status(401)
-          .send("This email is not register, please create an account!");
+          .send("This email is not registered, please create an account!");
       }
     })
     .catch((error) => {
@@ -102,27 +100,70 @@ const verifyEmail = (req, res, next) => {
 const verifyToken = (req, res, next) => {
   const authorizationHeader = req.get("Authorization");
 
-  if (authorizationHeader === null) {
-    res.status(403).send("Authorization header is missing");
+  if (!authorizationHeader) {
+    return res.status(401).send("Authorization header is missing");
   }
 
   const [type, token] = authorizationHeader.split(" ");
 
   if (type !== "Bearer") {
-    res.status(403).send("Authorization header has not the 'Bearer' type");
+    return res.status(401).send("Authorization header has the wrong token type");
   }
-
   jwt.verify(token, process.env.PRIVATE_KEY, (error, decoded) => {
     if (error) {
-      console.error(error);
-      res.status(403).send("Error decoding authorization header");
-    } else {
-      req.body.email = decoded.sub;
-
-      next();
+      // console.error(error);
+      if (error.name === 'TokenExpiredError') {
+        return res.status(401).send("Token has expired");
+      } else if (error.name === 'JsonWebTokenError') {
+        return res.status(401).send("Invalid token");
+      } else {
+        return res.status(500).send("Error decoding authorization header");
+      }
     }
+
+    req.body.email = decoded.sub;
+    next();
   });
 };
+
+const verifyUserHasInfoInBody = (req, res, next) => {
+  // console.log(req.body);
+  User.findUserToUpdate(req.body)
+    .then((user) => {
+      if (!user) { // Check if user is null or undefined
+        res.status(401).send("User not found or has no user information");
+      } else {
+        // User found, go to the next middleware
+        next();
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error retrieving user data from db");
+    });
+}
+
+const verifyEmailToUpdateUser = (req, res, next) => {
+  // console.log(req.body);
+  User.findUserToUpdate(req.body.email)
+    .then((user) => {
+      // console.log(user);
+      if (user !== null && user.length > 0) {
+        // Check if the user is the same as the current user
+        if (user[0].id === user.id) {
+          next(); // Same user, allow email update
+        } else {
+          res.status(401).send("This email is already in use by another user!");
+        }
+      } else {
+        next(); // Email is not in use, continue
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error retrieving data from db");
+    });
+  };
 
 module.exports = {
   hashPassword,
@@ -130,4 +171,6 @@ module.exports = {
   verifyPassword,
   verifyEmail,
   verifyToken,
+  verifyUserHasInfoInBody,
+  verifyEmailToUpdateUser,
 };

@@ -11,6 +11,6 @@ passwordRoutes.post("/change-password", verifyToken, verifyPassword, hashPasswor
 
 //* forget password
 //* endpoint: /password/forget-password
-passwordRoutes.post("/forget-password", verifyEmail, passwordController.forgetPassword)
+passwordRoutes.post("/forgot-password", verifyEmail, passwordController.forgetPassword)
 
 module.exports = passwordRoutes

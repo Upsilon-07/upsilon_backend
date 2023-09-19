@@ -6,6 +6,7 @@ const { setupRoutes } = require("./src/routes/index.routes")
 const port = process.env.PORT;
 
 const server = express();
+server.use(express.json())
 
 server.use(
   cors({
@@ -17,7 +18,6 @@ server.get("/", (req,res)=>{
   res.send("Welcome to the server")
 })
 
-server.use(express.json())
 
 
 setupRoutes(server)
