@@ -7,6 +7,9 @@ usersRoutes.get("/", verifyToken, userController.getUserInfo);
 
 // Update user information
 //* endpoint: /user/:id
-usersRoutes.put("/:id", userController.editUserInfo)
+usersRoutes.put("/:id", verifyToken, userController.editUserInfo)
+// 
+
+usersRoutes.delete("/:id", verifyToken, userController.deleteUserToken)
 
 module.exports = usersRoutes;

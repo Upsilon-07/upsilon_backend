@@ -83,9 +83,18 @@ const editUserInfo = (req, res) => {
     });
 };
 
+const deleteUserToken = (req, res) => {
+  const id = Number(req.params.id);
+
+  const { body } = req;
+
+  console.log(id, body);
+}
+
 module.exports = {
   createUser,
   login,
   getUserInfo,
   editUserInfo,
+  deleteUserToken,
 };
